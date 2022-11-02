@@ -4,7 +4,10 @@ import "./index.css";
 
 function Square(props) {
   return (
-    <button className={props.bold ? 'square bold' : 'square'} onClick={() => props.onClick()}>
+    <button
+      className={props.bold ? "square bold" : "square"}
+      onClick={() => props.onClick()}
+    >
       {props.value}
     </button>
   );
@@ -13,36 +16,36 @@ function Square(props) {
 class Board extends React.Component {
   renderSquare(i, row, col) {
     let isBold;
-    if (row == this.props.row && col == this.props.col) {
-      isBold =true
+    if (row === this.props.row && col === this.props.col) {
+      isBold = true;
     }
     return (
       <Square
-      value={this.props.squares[i]}
-      bold={isBold}
-      onClick={() => this.props.onClick(i, row, col)}
-    />
-    )
+        value={this.props.squares[i]}
+        bold={isBold}
+        onClick={() => this.props.onClick(i, row, col)}
+      />
+    );
+  }
+
+  getBoard = () => {
+    let col = [];
+    let index = 0;
+    for (let i = 1; i <= 3; i++) {
+      let row = [];
+      for (let j = 1; j <= 3; j++) {
+        row.push(this.renderSquare(index, i, j));
+        index++;
+      }
+      col.push(<div className="board-row">{row}</div>)
+    }
+    return col
   }
 
   render() {
     return (
       <div>
-        <div className="board-row">
-          {this.renderSquare(0, 1, 1)}
-          {this.renderSquare(1, 1, 2)}
-          {this.renderSquare(2, 1, 3)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(3, 2, 1)}
-          {this.renderSquare(4, 2, 2)}
-          {this.renderSquare(5, 2, 3)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(6, 3, 1)}
-          {this.renderSquare(7, 3, 2)}
-          {this.renderSquare(8, 3, 3)}
-        </div>
+        {this.getBoard()}
       </div>
     );
   }
