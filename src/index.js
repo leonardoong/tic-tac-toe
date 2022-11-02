@@ -4,7 +4,7 @@ import "./index.css";
 
 function Square(props) {
   return (
-    <button className="square" onClick={() => props.onClick()}>
+    <button className={props.bold ? 'square bold' : 'square'} onClick={() => props.onClick()}>
       {props.value}
     </button>
   );
@@ -12,12 +12,17 @@ function Square(props) {
 
 class Board extends React.Component {
   renderSquare(i, row, col) {
+    let isBold;
+    if (row == this.props.row && col == this.props.col) {
+      isBold =true
+    }
     return (
       <Square
-        value={this.props.squares[i]}
-        onClick={() => this.props.onClick(i, row, col)}
-      />
-    );
+      value={this.props.squares[i]}
+      bold={isBold}
+      onClick={() => this.props.onClick(i, row, col)}
+    />
+    )
   }
 
   render() {
@@ -120,6 +125,8 @@ class Game extends React.Component {
         <div className="game-board">
           <Board
             squares={current.squares}
+            col={current.col}
+            row={current.row}
             onClick={(i, r, c) => this.handleClick(i, r, c)}
           />
         </div>
