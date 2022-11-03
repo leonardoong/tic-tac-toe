@@ -37,17 +37,13 @@ class Board extends React.Component {
         row.push(this.renderSquare(index, i, j));
         index++;
       }
-      col.push(<div className="board-row">{row}</div>)
+      col.push(<div className="board-row">{row}</div>);
     }
-    return col
-  }
+    return col;
+  };
 
   render() {
-    return (
-      <div>
-        {this.getBoard()}
-      </div>
-    );
+    return <div>{this.getBoard()}</div>;
   }
 }
 
@@ -64,6 +60,7 @@ class Game extends React.Component {
       ],
       isXNext: true,
       stepNumber: 0,
+      isAsc : true,
     };
   }
 
@@ -95,6 +92,12 @@ class Game extends React.Component {
     });
   }
 
+  toggleAscDesc() {
+    this.setState({
+      isAsc: !this.state.isAsc,
+    });
+  }
+
   render() {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
@@ -116,6 +119,10 @@ class Game extends React.Component {
       );
     });
 
+    if (!this.state.isAsc) {
+      moves.reverse()
+    }
+
     let status;
     if (winner) {
       status = "Winner : " + winner;
@@ -136,6 +143,33 @@ class Game extends React.Component {
         <div className="game-info">
           <div>{status}</div>
           <ol>{moves}</ol>
+        </div>
+        <div className="toggle">
+          <ToggleSwitch label={"ASC/DESC"} onClick={() => this.toggleAscDesc()}/>
+        </div>
+      </div>
+    );
+  }
+}
+
+class ToggleSwitch extends React.Component {
+
+  render() {
+    return (
+      <div className="container">
+        {this.props.label}{" "}
+        <div className="toggle-switch">
+          <input
+            type="checkbox"
+            className="checkbox"
+            name={this.props.label}
+            id={this.props.label}
+            onClick={() => this.props.onClick()}
+          />
+          <label className="label" htmlFor={this.props.label}>
+            <span className="inner" />
+            <span className="switch" />
+          </label>
         </div>
       </div>
     );

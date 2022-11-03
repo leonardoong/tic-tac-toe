@@ -1,54 +1,125 @@
 body {
-    font: 14px "Century Gothic", Futura, sans-serif;
-    margin: 20px;
-  }
-  
-  ol, ul {
-    padding-left: 30px;
-  }
-  
-  .board-row:after {
-    clear: both;
-    content: "";
-    display: table;
-  }
-  
-  .status {
-    margin-bottom: 10px;
-  }
-  
-  .square {
-    background: #fff;
-    border: 1px solid #999;
-    float: left;
-    font-size: 24px;
-    line-height: 34px;
-    height: 34px;
-    margin-right: -1px;
-    margin-top: -1px;
-    padding: 0;
-    text-align: center;
-    width: 34px;
-  }
+  font: 14px "Century Gothic", Futura, sans-serif;
+  margin: 20px;
+}
 
-  .square.bold {
-    font-weight: bold;
-  }
-  
-  .square:focus {
-    outline: none;
-  }
-  
-  .kbd-navigation .square:focus {
-    background: #ddd;
-  }
-  
-  .game {
-    display: flex;
-    flex-direction: row;
-  }
-  
-  .game-info {
-    margin-left: 20px;
-  }
-  
+ol,
+ul {
+  padding-left: 30px;
+}
+
+.board-row:after {
+  clear: both;
+  content: "";
+  display: table;
+}
+
+.status {
+  margin-bottom: 10px;
+}
+
+.square {
+  background: #fff;
+  border: 1px solid #999;
+  float: left;
+  font-size: 24px;
+  line-height: 34px;
+  height: 34px;
+  margin-right: -1px;
+  margin-top: -1px;
+  padding: 0;
+  text-align: center;
+  width: 34px;
+}
+
+.square.bold {
+  font-weight: bold;
+}
+
+.square:focus {
+  outline: none;
+}
+
+.kbd-navigation .square:focus {
+  background: #ddd;
+}
+
+.game {
+  display: flex;
+  flex-direction: row;
+}
+
+.game-info {
+  margin-left: 20px;
+}
+
+.container {
+  text-align: center;
+  margin-left: 20px;
+}
+.toggle-switch {
+  position: relative;
+  width: 85px;
+  display: inline-block;
+  text-align: left;
+  top: 8px;
+}
+.checkbox {
+  display: none;
+}
+.label {
+  display: block;
+  overflow: hidden;
+  cursor: pointer;
+  border: 0 solid #bbb;
+  border-radius: 20px;
+}
+.inner {
+  display: block;
+  width: 200%;
+  margin-left: -100%;
+  transition: margin 0.3s ease-in 0s;
+}
+.inner:before,
+.inner:after {
+  float: left;
+  width: 50%;
+  height: 36px;
+  padding: 0;
+  line-height: 36px;
+  color: #fff;
+  font-weight: bold;
+  box-sizing: border-box;
+}
+.inner:before {
+  content: "DESC";
+  padding-left: 10px;
+  background-color: #060;
+  color: #fff;
+}
+.inner:after {
+  content: "ASC";
+  padding-right: 10px;
+  background-color: #bbb;
+  color: #fff;
+  text-align: right;
+}
+.switch {
+  display: block;
+  width: 24px;
+  margin: 5px;
+  background: #fff;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 50px;
+  border: 0 solid #bbb;
+  border-radius: 20px;
+  transition: all 0.3s ease-in 0s;
+}
+.checkbox:checked + .label .inner {
+  margin-left: 0;
+}
+.checkbox:checked + .label .switch {
+  right: 0px;
+}
